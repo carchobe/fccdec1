@@ -20,9 +20,9 @@ films_with_actors AS (
       f.film_id,
       f.title,
       STRING_AGG(a.actor_name, ',') AS actors
-    FROM {{ ref('films') }}
+    FROM {{ ref('films') }} f
     LEFT JOIN {{ ref('film_actors') }} fa ON f.film_id = fa.film_id
-    LEFT JOIN {{ red('actors') }} a ON fa.actor_id = a.actor_id
+    LEFT JOIN {{ ref('actors') }} a ON fa.actor_id = a.actor_id
     GROUP BY f.film_id, f.title
 )
 
